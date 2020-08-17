@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Zadatak_1.Helper;
@@ -76,6 +77,25 @@ namespace Zadatak_1.Models
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return false;
+            }
+        }
+        /// <summary>
+        /// This method creates a list of data from view of all employees.
+        /// </summary>
+        /// <returns>List of employees.</returns>
+        public List<vwEmployee> GetAllEmployees()
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    return context.vwEmployees.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
             }
         }
     }

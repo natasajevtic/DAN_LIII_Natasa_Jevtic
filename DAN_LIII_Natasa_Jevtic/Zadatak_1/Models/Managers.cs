@@ -68,5 +68,24 @@ namespace Zadatak_1.Models
                 return null;
             }
         }
+        /// <summary>
+        /// This method checks if manager exists in database.
+        /// </summary>
+        /// <returns>True if exists, false if not.</returns>
+        public bool CheckIfManagerExists()
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    return context.vwManagers.Any();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
     }
 }
