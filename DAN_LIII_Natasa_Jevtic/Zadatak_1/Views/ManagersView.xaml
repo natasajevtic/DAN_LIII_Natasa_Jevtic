@@ -7,6 +7,46 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label Content="Managers"
+               Grid.Column="1"
+               Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                    Grid.Column="1"
+                    Grid.Row ="3">
+            <Button Content="Add" Command="{Binding Add, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0"/>            
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="5">
+            <DataGrid ItemsSource="{Binding ManagerList,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Manager, UpdateSourceTrigger=PropertyChanged}"
+                IsReadOnly="True" HeadersVisibility="Column"  AutoGenerateColumns="False"
+                ScrollViewer.CanContentScroll="True" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Manager" Binding="{Binding NameAndSurname}"/>                    
+                    <DataGridTextColumn Header="Date of birth" Binding="{Binding DateOfBirth, StringFormat=d}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
+                    <DataGridTextColumn Header="Password" Binding="{Binding Password}"/>
+                    <DataGridTextColumn Header="Floor" Binding="{Binding HotelFloor}"/>
+                    <DataGridTextColumn Header="Work experience" Binding="{Binding ExperienceWorkingInHotels}"/>
+                    <DataGridTextColumn Header="Education degree" Binding="{Binding ProfessionalQualifications}"/>                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Zadatak_1.Helper;
 
 namespace Zadatak_1.Models
@@ -46,6 +48,25 @@ namespace Zadatak_1.Models
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return false;
             }
-        }        
+        }
+        /// <summary>
+        /// This method creates a list of data from view of all managers.
+        /// </summary>
+        /// <returns>List of managers.</returns>
+        public List<vwManager> GetAllManagers()
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    return context.vwManagers.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
     }
 }
