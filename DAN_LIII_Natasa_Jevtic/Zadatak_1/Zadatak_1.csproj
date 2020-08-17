@@ -74,6 +74,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Validations\DateOfBirthValidation.cs" />
+    <Compile Include="Validations\EmailValidation.cs" />
+    <Compile Include="Validations\ExperienceValidation.cs" />
+    <Compile Include="Validations\NameAndSurnameValidation.cs" />
+    <Compile Include="Validations\NumberOfFloorValidation.cs" />
+    <Compile Include="Validations\UsernameValidation.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ItemMenu.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
