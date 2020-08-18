@@ -22,5 +22,6 @@ namespace Zadatak_1.Models
         public string Status { get; set; }
         public string ReasonForRejection { get; set; }
         public string Employee { get; set; }
+        public int HotelFloor { get; set; }
     }
 }

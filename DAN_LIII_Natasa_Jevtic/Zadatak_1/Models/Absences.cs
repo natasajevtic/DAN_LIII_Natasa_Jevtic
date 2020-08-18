@@ -56,5 +56,76 @@ namespace Zadatak_1.Models
                 return null;
             }
         }
+        /// <summary>
+        /// This method remove request from DbSet and save changes to database.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>True if deleted, false if not.</returns>
+        public bool DeleteRequest(vwAbsence request)
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    tblAbsence requestToDelete = context.tblAbsences.Where(x => x.AbsenceId == request.AbsenceId).FirstOrDefault();
+                    requestToDelete.Status = "deleted";
+                    requestToDelete.ReasonForRejection = request.ReasonForRejection;
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
+        /// <summary>
+        /// This method changes status of absence to rejected.
+        /// </summary>
+        /// <param name="request">Request to be rejected.</param>
+        /// <returns>True if rejected, false if not.</returns>
+        public bool RejectRequest(vwAbsence request)
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    tblAbsence requestToReject = context.tblAbsences.Where(x => x.AbsenceId == request.AbsenceId).FirstOrDefault();
+                    requestToReject.Status = "rejected";
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
+        /// <summary>
+        /// This method changes status of absence to approved.
+        /// </summary>
+        /// <param name="request">Request to be approved.</param>
+        /// <returns>True if approved, false if not.</returns>
+        public bool ApproveRequest(vwAbsence request)
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    tblAbsence requestToApprove = context.tblAbsences.Where(x => x.AbsenceId == request.AbsenceId).FirstOrDefault();
+                    requestToApprove.Status = "approved";
+                    context.SaveChanges();                    
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
     }
 }

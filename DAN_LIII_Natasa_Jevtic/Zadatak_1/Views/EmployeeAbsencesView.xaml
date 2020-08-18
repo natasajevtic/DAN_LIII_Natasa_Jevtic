@@ -27,7 +27,10 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
                     Grid.Column="1"
                     Grid.Row ="3">
-            <Button Content="Request" Command="{Binding Add, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0"/>
+            <Button Content="Request" Command="{Binding Add, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0" x:Name="btnAdd"/>
+            <Button Content="Approve" Command="{Binding Approve, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0" x:Name="btnApprove"/>
+            <Button Content="Reject" Command="{Binding Reject, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0" x:Name="btnReject"/>
+            <Button Content="Delete" Command="{Binding Delete, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,5,0" x:Name="btnDelete"/>
         </StackPanel>
         <Grid Grid.Column="1" Grid.Row="5">
             <DataGrid ItemsSource="{Binding AbsencesList,UpdateSourceTrigger=PropertyChanged}"
@@ -37,6 +40,7 @@
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="Employee" Binding="{Binding Employee}" x:Name="columEmployee"/>
                     <DataGridTextColumn Header="First day" Binding="{Binding FirstDay, StringFormat=d}"/>
                     <DataGridTextColumn Header="Last day" Binding="{Binding LastDay, StringFormat=d}"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding Reason}"/>

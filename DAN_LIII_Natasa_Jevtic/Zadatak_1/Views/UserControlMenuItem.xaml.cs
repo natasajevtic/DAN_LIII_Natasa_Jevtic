@@ -12,6 +12,7 @@ namespace Zadatak_1.Views
     {
         OwnerView _context;
         EmployeeView employeeContext;
+        ManagerView managerContext;
 
         private bool mouseClicked;
 
@@ -37,6 +38,17 @@ namespace Zadatak_1.Views
             this.DataContext = itemMenu;
         }
 
+        public UserControlMenuItem(ItemMenu itemMenu, ManagerView context)
+        {
+            InitializeComponent();
+            managerContext = context;
+
+            ExpanderMenu.Visibility = itemMenu.SubItems == null ? Visibility.Collapsed : Visibility.Visible;
+            ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
+
+            this.DataContext = itemMenu;
+        }
+
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (mouseClicked)
@@ -50,6 +62,10 @@ namespace Zadatak_1.Views
                     else if (employeeContext != null)
                     {
                         employeeContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
+                    }
+                    else if (managerContext != null)
+                    {
+                        managerContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
                     }
                 }
             }
@@ -67,6 +83,10 @@ namespace Zadatak_1.Views
                 else if (employeeContext != null)
                 {
                     employeeContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
+                }
+                else if (managerContext != null)
+                {
+                    managerContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
                 }
             }
         }

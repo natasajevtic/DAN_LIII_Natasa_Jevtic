@@ -71,7 +71,9 @@ INNER JOIN tblEmployee e
 ON u.UserId = e.UserId;
 GO
 create view vwAbsence as
-select a.* , u.NameAndSurname + ' ' + u.Username 'Employee'
+select a.* , u.NameAndSurname + ' ' + u.Username 'Employee', e.HotelFloor
 from tblAbsence a
 INNER JOIN tblUser u
-ON u.UserId = a.UserId;
+ON u.UserId = a.UserId
+INNER JOIN tblEmployee e
+ON e.UserId = u.UserId;

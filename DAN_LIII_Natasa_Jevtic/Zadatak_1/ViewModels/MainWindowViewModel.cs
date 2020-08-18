@@ -80,7 +80,7 @@ namespace Zadatak_1.ViewModels
             else if (users.FindManager(Username, Password) != null)
             {
                 Manager = users.FindManager(Username, Password);
-                ManagerView managerView = new ManagerView();
+                ManagerView managerView = new ManagerView(Manager);
                 managerView.ShowDialog();
 
             }
