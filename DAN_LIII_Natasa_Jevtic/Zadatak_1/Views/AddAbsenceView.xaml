@@ -1,0 +1,107 @@
+﻿<Window x:Class="Zadatak_1.Views.AddAbsenceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.Views"
+         xmlns:Validation="clr-namespace:Zadatak_1.Validations"
+        mc:Ignorable="d"
+        Title="Request absence" MinHeight="250" MinWidth="500" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="auto"/> 
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Label Content="First day:"
+               Grid.Column="1"
+               Grid.Row="1"/>
+        <Label Content="Last day:"
+               Grid.Column="1"
+               Grid.Row="3"/>
+        <Label Content="Description:"
+               Grid.Column="1"
+               Grid.Row="5"/>        
+        <TextBox x:Name="txtFirstDay"
+                 Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                 Grid.Column="3"
+                 Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="Absence.FirstDay"
+                         UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnDataErrors="True"
+                         NotifyOnValidationError="True"
+                         StringFormat="d">
+                    <Binding.ValidationRules>
+                        <Validation:DateOfApplicationValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="txtLastDay"
+                 Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                 Grid.Column="3"
+                 Grid.Row="3"
+                 xmlns:Bind="clr-namespace:Zadatak_1.Helper">
+            <TextBox.Resources>
+                <Bind:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            </TextBox.Resources>
+            <TextBox.Text>
+                <Binding Path="Absence.LastDay"
+                         UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnDataErrors="True"
+                         NotifyOnValidationError="True"
+                         StringFormat="d">
+                    <Binding.ValidationRules>                        
+                        <Validation:LastDayValidation>
+                            <Validation:LastDayValidation.Wrapper>
+                                <Validation:Wrapper FirstDay="{Binding Data.Absence.FirstDay, Source={StaticResource proxy}, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Validation:LastDayValidation.Wrapper>
+                            </Validation:LastDayValidation>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>        
+        <TextBox Grid.Column="3" Grid.Row="5" Text="{Binding Absence.Reason}"/>
+       
+        <Button Grid.Column="1" 
+                Grid.Row="7" 
+                Content="Save" 
+                Command="{Binding Save}"
+                CommandParameter="{Binding ElementName=btnPassword}">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtFirstDay}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtLastDay}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="3" 
+                Grid.Row="7" 
+                Content="Cancel" 
+                Command="{Binding Cancel}" 
+                Width="130" 
+                HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
