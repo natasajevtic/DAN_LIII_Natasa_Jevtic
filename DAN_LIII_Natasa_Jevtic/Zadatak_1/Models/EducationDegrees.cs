@@ -5,7 +5,7 @@ namespace Zadatak_1.Models
 {
     class EducationDegrees
     {
-        Dictionary<string, int> levels = new Dictionary<string, int>()
+        public Dictionary<string, int> levels = new Dictionary<string, int>()
         {
             {"I",1 },
             {"II", 2 },

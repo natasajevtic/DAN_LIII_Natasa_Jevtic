@@ -75,7 +75,9 @@
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Helper\BindingProxy.cs" />
+    <Compile Include="Helper\CalculateSalary.cs" />
     <Compile Include="Models\Absences.cs" />
+    <Compile Include="Validations\AdditionValidation.cs" />
     <Compile Include="Validations\DateOfApplicationValidation.cs" />
     <Compile Include="Validations\DateOfBirthValidation.cs" />
     <Compile Include="Validations\EmailValidation.cs" />

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Zadatak_1.Commands;
 using Zadatak_1.Models;
 using Zadatak_1.Views;
+using Zadatak_1.Helper;
 
 namespace Zadatak_1.ViewModels
 {
@@ -26,6 +27,36 @@ namespace Zadatak_1.ViewModels
             {
                 employee = value;
                 OnPropertyChanged("Employee");
+            }
+        }
+
+        private vwManager manager;
+
+        public vwManager Manager
+        {
+            get
+            {
+                return manager;
+            }
+            set
+            {
+                manager = value;
+                OnPropertyChanged("Manager");
+            }
+        }
+
+        private int addition;
+
+        public int Addition
+        {
+            get
+            {
+                return addition;
+            }
+            set
+            {
+                addition = value;
+                OnPropertyChanged("Addition");
             }
         }
 
@@ -57,10 +88,30 @@ namespace Zadatak_1.ViewModels
             }
         }
 
+        private ICommand defineSalary;
+        public ICommand DefineSalary
+        {
+            get
+            {
+                if (defineSalary == null)
+                {
+                    defineSalary = new RelayCommand(param => DefineSalaryExecute(), param => CanDefineSalaryExecute());
+                }
+                return defineSalary;
+            }
+        }
+
         public EmployeesViewModel(EmployeesView employeesView)
         {
             this.employeesView = employeesView;
             EmployeeList = employees.GetAllEmployees();
+        }
+
+        public EmployeesViewModel(EmployeesView employeesView, vwManager manager)
+        {
+            this.employeesView = employeesView;
+            Manager = manager;
+            EmployeeList = managers.GetEmployees(Manager);
         }
         /// <summary>
         /// This method invokes method for opening a window for adding employees.
@@ -79,7 +130,7 @@ namespace Zadatak_1.ViewModels
                 {
                     MessageBox.Show("Please create a manager first.", "Notification.", MessageBoxButton.OK);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -90,6 +141,62 @@ namespace Zadatak_1.ViewModels
         public bool CanAddExecute()
         {
             return true;
+        }
+
+        public void DefineSalaryExecute()
+        {
+            if (String.IsNullOrEmpty(Addition.ToString()) || Addition == 0)
+            {
+                MessageBox.Show("Please fill field for addition.", "Notification");
+            }
+            else
+            {
+
+                try
+                {
+                    if (Employee != null)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Are you sure you want to define salary?", "Confirmation", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            Employee.Salary = CalculateSalary.CalculateForOne(Manager, Employee, Addition);
+                            bool isDefine = employees.SetSalary(Employee);
+                            if (isDefine == true)
+                            {
+                                MessageBox.Show("Salary is defined.", "Notification", MessageBoxButton.OK);
+                                EmployeeList = managers.GetEmployees(Manager);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Salary cannot be defined.", "Notification", MessageBoxButton.OK);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        public bool CanDefineSalaryExecute()
+        {
+            if (Employee != null)
+            {
+                if (Employee.Engagement == "monitoring" || Employee.Engagement == "reporting")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

@@ -98,5 +98,24 @@ namespace Zadatak_1.Models
                 return null;
             }
         }
+
+        public bool SetSalary(vwEmployee employee)
+        {
+            try
+            {
+                using (HotelEntities context = new HotelEntities())
+                {
+                    tblEmployee employeeToEdit = context.tblEmployees.Where(x => x.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                    employeeToEdit.Salary = employee.Salary;
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
     }
 }
