@@ -50,7 +50,8 @@ UserId int FOREIGN KEY REFERENCES tblUser(UserId) NOT NULL,
 FirstDay date NOT NULL,
 LastDay date NOT NULL,
 Reason varchar(100) NOT NULL,
-Status varchar(20) NOT NULL
+Status varchar(20) NOT NULL,
+ReasonForRejection varchar(100)
 );
 GO
 create view vwUser as
@@ -70,7 +71,7 @@ INNER JOIN tblEmployee e
 ON u.UserId = e.UserId;
 GO
 create view vwAbsence as
-select a.* , u.NameAndSurname
+select a.* , u.NameAndSurname + ' ' + u.Username 'Employee'
 from tblAbsence a
 INNER JOIN tblUser u
 ON u.UserId = a.UserId;

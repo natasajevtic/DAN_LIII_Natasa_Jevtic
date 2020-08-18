@@ -20,6 +20,7 @@ namespace Zadatak_1.Models
         public System.DateTime LastDay { get; set; }
         public string Reason { get; set; }
         public string Status { get; set; }
+        public string ReasonForRejection { get; set; }
     
         public virtual tblUser tblUser { get; set; }
     }

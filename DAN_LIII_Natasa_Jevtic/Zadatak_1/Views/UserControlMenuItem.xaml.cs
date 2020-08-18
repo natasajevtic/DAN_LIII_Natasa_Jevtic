@@ -10,7 +10,8 @@ namespace Zadatak_1.Views
     /// </summary>
     public partial class UserControlMenuItem : UserControl
     {
-        OwnerView _context;        
+        OwnerView _context;
+        EmployeeView employeeContext;
 
         private bool mouseClicked;
 
@@ -23,7 +24,18 @@ namespace Zadatak_1.Views
             ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
 
             this.DataContext = itemMenu;
-        }           
+        }
+
+        public UserControlMenuItem(ItemMenu itemMenu, EmployeeView context)
+        {
+            InitializeComponent();
+            employeeContext = context;
+
+            ExpanderMenu.Visibility = itemMenu.SubItems == null ? Visibility.Collapsed : Visibility.Visible;
+            ListViewItemMenu.Visibility = itemMenu.SubItems == null ? Visibility.Visible : Visibility.Collapsed;
+
+            this.DataContext = itemMenu;
+        }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -34,7 +46,11 @@ namespace Zadatak_1.Views
                     if (_context != null)
                     {
                         _context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
-                    }                    
+                    }
+                    else if (employeeContext != null)
+                    {
+                        employeeContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
+                    }
                 }
             }
         }
@@ -47,7 +63,11 @@ namespace Zadatak_1.Views
                 if (_context != null)
                 {
                     _context.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
-                }                
+                }
+                else if (employeeContext != null)
+                {
+                    employeeContext.SwitchScreen(((SubItem)((ListView)sender).SelectedItem).Screen);
+                }
             }
         }
     }

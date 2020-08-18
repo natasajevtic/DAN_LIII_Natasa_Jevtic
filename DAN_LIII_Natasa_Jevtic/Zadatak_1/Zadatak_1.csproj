@@ -74,26 +74,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Helper\BindingProxy.cs" />
+    <Compile Include="Models\Absences.cs" />
+    <Compile Include="Validations\DateOfApplicationValidation.cs" />
     <Compile Include="Validations\DateOfBirthValidation.cs" />
     <Compile Include="Validations\EmailValidation.cs" />
     <Compile Include="Validations\ExperienceValidation.cs" />
+    <Compile Include="Validations\LastDayValidation.cs" />
     <Compile Include="Validations\NameAndSurnameValidation.cs" />
     <Compile Include="Validations\NumberOfFloorValidation.cs" />
     <Compile Include="Validations\UsernameValidation.cs" />
+    <Compile Include="Validations\Wrapper.cs" />
+    <Compile Include="ViewModels\AddAbsenceViewModel.cs" />
     <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddManagerViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeAbsencesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\ItemMenu.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ManagersViewModel.cs" />
     <Compile Include="ViewModels\OwnerViewModel.cs" />
     <Compile Include="ViewModels\SubItem.cs" />
+    <Compile Include="Views\AddAbsenceView.xaml.cs">
+      <DependentUpon>AddAbsenceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddManagerView.xaml.cs">
       <DependentUpon>AddManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeAbsencesView.xaml.cs">
+      <DependentUpon>EmployeeAbsencesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
@@ -126,11 +140,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddAbsenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddManagerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeAbsencesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblAbsence">
           <Key>
             <PropertyRef Name="AbsenceId" />
@@ -15,6 +15,7 @@
           <Property Name="LastDay" Type="date" Nullable="false" />
           <Property Name="Reason" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ReasonForRejection" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
@@ -59,7 +60,7 @@ warning 6002: The table/view 'Hotel.dbo.vwAbsence' does not have a primary key d
             <PropertyRef Name="LastDay" />
             <PropertyRef Name="Reason" />
             <PropertyRef Name="Status" />
-            <PropertyRef Name="NameAndSurname" />
+            <PropertyRef Name="Employee" />
           </Key>
           <Property Name="AbsenceId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
@@ -67,7 +68,8 @@ warning 6002: The table/view 'Hotel.dbo.vwAbsence' does not have a primary key d
           <Property Name="LastDay" Type="date" Nullable="false" />
           <Property Name="Reason" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="NameAndSurname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReasonForRejection" Type="varchar" MaxLength="100" />
+          <Property Name="Employee" Type="varchar" MaxLength="141" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Hotel.dbo.vwEmployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -142,7 +144,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
           <Property Name="Username" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblAbsenc__UserI__14E61A24">
+        <Association Name="FK__tblAbsenc__UserI__67DE6983">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblAbsence" Type="Self.tblAbsence" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,7 +156,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblEmploy__UserI__10216507">
+        <Association Name="FK__tblEmploy__UserI__6319B466">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -166,7 +168,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblManage__UserI__0B5CAFEA">
+        <Association Name="FK__tblManage__UserI__5E54FF49">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
           <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
           <ReferentialConstraint>
@@ -191,7 +193,8 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
     [vwAbsence].[LastDay] AS [LastDay], 
     [vwAbsence].[Reason] AS [Reason], 
     [vwAbsence].[Status] AS [Status], 
-    [vwAbsence].[NameAndSurname] AS [NameAndSurname]
+    [vwAbsence].[ReasonForRejection] AS [ReasonForRejection], 
+    [vwAbsence].[Employee] AS [Employee]
     FROM [dbo].[vwAbsence] AS [vwAbsence]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwEmployee" EntityType="Self.vwEmployee" store:Type="Views" store:Schema="dbo">
@@ -234,21 +237,20 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
     [vwUser].[Password] AS [Password]
     FROM [dbo].[vwUser] AS [vwUser]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblAbsenc__UserI__14E61A24" Association="Self.FK__tblAbsenc__UserI__14E61A24">
+          <AssociationSet Name="FK__tblAbsenc__UserI__67DE6983" Association="Self.FK__tblAbsenc__UserI__67DE6983">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblAbsence" EntitySet="tblAbsence" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblEmploy__UserI__10216507" Association="Self.FK__tblEmploy__UserI__10216507">
+          <AssociationSet Name="FK__tblEmploy__UserI__6319B466" Association="Self.FK__tblEmploy__UserI__6319B466">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblEmployee" EntitySet="tblEmployee" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblManage__UserI__0B5CAFEA" Association="Self.FK__tblManage__UserI__0B5CAFEA">
+          <AssociationSet Name="FK__tblManage__UserI__5E54FF49" Association="Self.FK__tblManage__UserI__5E54FF49">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblManager" EntitySet="tblManager" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -263,6 +265,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
           <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblUser" Relationship="Self.FK__tblAbsenc__UserI__14E61A24" FromRole="tblAbsence" ToRole="tblUser" />
+          <Property Name="ReasonForRejection" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
@@ -310,7 +313,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
             <PropertyRef Name="LastDay" />
             <PropertyRef Name="Reason" />
             <PropertyRef Name="Status" />
-            <PropertyRef Name="NameAndSurname" />
+            <PropertyRef Name="Employee" />
           </Key>
           <Property Name="AbsenceId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
@@ -318,7 +321,8 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
           <Property Name="LastDay" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NameAndSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReasonForRejection" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Employee" Type="String" Nullable="false" MaxLength="141" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vwEmployee">
           <Key>
@@ -454,6 +458,7 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
           <EntitySetMapping Name="tblAbsences">
             <EntityTypeMapping TypeName="HotelModel.tblAbsence">
               <MappingFragment StoreEntitySet="tblAbsence">
+                <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstDay" ColumnName="FirstDay" />
@@ -502,13 +507,14 @@ warning 6002: The table/view 'Hotel.dbo.vwUser' does not have a primary key defi
           <EntitySetMapping Name="vwAbsences">
             <EntityTypeMapping TypeName="HotelModel.vwAbsence">
               <MappingFragment StoreEntitySet="vwAbsence">
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
                 <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="FirstDay" ColumnName="FirstDay" />
                 <ScalarProperty Name="LastDay" ColumnName="LastDay" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="NameAndSurname" ColumnName="NameAndSurname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

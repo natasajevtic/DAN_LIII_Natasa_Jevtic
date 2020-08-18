@@ -17,6 +17,7 @@ namespace Zadatak_1.ViewModels
         string OwnerUsername { get; set; }
         string OwnerPassword { get; set; }
         public vwManager Manager { get; set; }
+        public vwEmployee Employee { get; set; }
 
         private string username;
 
@@ -85,7 +86,8 @@ namespace Zadatak_1.ViewModels
             }
             else if (users.FindEmployee(Username, Password) != null)
             {
-                EmployeeView employeeView = new EmployeeView();
+                Employee = users.FindEmployee(Username, Password);
+                EmployeeView employeeView = new EmployeeView(Employee);
                 employeeView.ShowDialog();
             }
             else
