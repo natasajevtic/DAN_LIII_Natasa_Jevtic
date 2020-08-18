@@ -63,7 +63,7 @@ namespace Zadatak_1.ViewModels
         {
             if (String.IsNullOrEmpty(Absence.ReasonForRejection))
             {
-                MessageBox.Show("Please fill fields.", "Notification");
+                MessageBox.Show("Please fill field.", "Notification");
             }
             else
             {

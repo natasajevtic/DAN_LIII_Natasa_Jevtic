@@ -1,4 +1,5 @@
-﻿using Zadatak_1.Models;
+﻿using System.Collections.Generic;
+using Zadatak_1.Models;
 
 namespace Zadatak_1.Helper
 {
@@ -19,6 +20,6 @@ namespace Zadatak_1.Helper
                 p = 1.15M;
             }
             return 1000 * i * s * p + addition;
-        }
+        }        
     }
 }

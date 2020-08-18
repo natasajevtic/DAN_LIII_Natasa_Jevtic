@@ -80,7 +80,8 @@ namespace Zadatak_1.ViewModels
         public void SaveExecute()
         {
             if (String.IsNullOrEmpty(Manager.NameAndSurname) || String.IsNullOrEmpty(Manager.DateOfBirth.ToString()) || String.IsNullOrEmpty(Manager.Email) || String.IsNullOrEmpty(Manager.Username)
-               || String.IsNullOrEmpty(Manager.Password) || String.IsNullOrEmpty(Manager.HotelFloor.ToString()) || String.IsNullOrEmpty(Manager.ExperienceWorkingInHotels.ToString()) || String.IsNullOrEmpty(Manager.ProfessionalQualifications))
+               || String.IsNullOrEmpty(Manager.Password) || String.IsNullOrEmpty(Manager.HotelFloor.ToString()) || String.IsNullOrEmpty(Manager.ExperienceWorkingInHotels.ToString()) || String.IsNullOrEmpty(Manager.ProfessionalQualifications)
+               || Manager.DateOfBirth == DateTime.MinValue)
             {
                 MessageBox.Show("Please fill all fields.", "Notification");
             }

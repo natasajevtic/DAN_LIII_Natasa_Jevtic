@@ -19,6 +19,8 @@ namespace Zadatak_1.Views
             btnDefineSalaryToAll.Visibility = Visibility.Collapsed;
             txtAddition.Visibility = Visibility.Collapsed;
             lblAddition.Visibility = Visibility.Collapsed;
+            progresBar.Visibility = Visibility.Collapsed;
+            message.Visibility = Visibility.Collapsed;
         }
         public EmployeesView(vwManager manager)
         {

@@ -21,6 +21,10 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Label Content="Employees"
                Grid.Column="1"
@@ -99,7 +103,9 @@
                     <DataGridTextColumn Header="Engagement" Binding="{Binding Engagement}"/>
                     <DataGridTextColumn Header="Salary" Binding="{Binding Salary}"/>
                 </DataGrid.Columns>
-            </DataGrid>
+            </DataGrid>            
         </Grid>
+        <ProgressBar x:Name="progresBar" Grid.Column="1" Grid.Row="7" Height="20" Grid.ColumnSpan="3" Value="{Binding Percent, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Width="100" HorizontalAlignment="Left"/>
+        <Label x:Name="message" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" Content="{Binding Message, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" HorizontalAlignment="Left"/>
     </Grid>
 </UserControl>

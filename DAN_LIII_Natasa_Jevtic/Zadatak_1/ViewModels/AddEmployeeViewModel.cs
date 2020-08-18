@@ -98,7 +98,7 @@ namespace Zadatak_1.ViewModels
         {
             if (String.IsNullOrEmpty(Employee.NameAndSurname) || String.IsNullOrEmpty(Employee.DateOfBirth.ToString()) || String.IsNullOrEmpty(Employee.Email) || String.IsNullOrEmpty(Employee.Username)
                || String.IsNullOrEmpty(Employee.Password) || String.IsNullOrEmpty(Employee.HotelFloor.ToString()) || String.IsNullOrEmpty(Employee.Engagement) || String.IsNullOrEmpty(Employee.Citizenship)
-               || String.IsNullOrEmpty(Employee.Gender))
+               || String.IsNullOrEmpty(Employee.Gender) || Employee.DateOfBirth == DateTime.MinValue)
             {
                 MessageBox.Show("Please fill all fields.", "Notification");
             }
